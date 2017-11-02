@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+"http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <!-- Add your configuration elements here -->
+      
+    <constant name="struts.devMode" value="true" />
+    
+    <package name="controllers" namespace="/" extends="struts-default,json-default">
+        
+        <!--
+        <interceptors>
+            <interceptor name="validateSession" class="interceptors.InterceptorAcceso" />
+            <interceptor-stack name="userStack">
+                <interceptor-ref name="validateSession">
+                    <param name="publicActions">index,nosotros</param>
+                </interceptor-ref>
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>        
+        
+        <default-interceptor-ref name="userStack" />        
+        
+        <global-results>
+            <result name="login">/index.jsp</result>
+        </global-results>
+        -->
+        
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+        </result-types>
+        
+        <action name="index" class="controllers.IndexController" method="execute">
+            <result name="success">index.jsp</result>
+        </action>
+        <action name="login" class="controllers.LoginController" method="execute">
+            <result type="redirectAction">
+                <param name="actionName">inicio</param>
+            </result>
+            <result name="invalidLogin">index.jsp</result>    
+        </action>
+        <action name="logout" class="controllers.LoginController" method="logout">
+            <result name="success">index.jsp</result>
+        </action>
+        <action name="inicio" class="controllers.IndexController" method="execute">
+            <result name="success" type="tiles">nosotros.tiles</result>
+        </action>
+        
+        <!--MENSAJES ENVIADOS-->
+        <action name="outgoing-message" class="controllers.OutgoingMessageController" method="execute">
+            <result name="success" type="tiles">outgoing_messages.tiles</result>  
+        </action>
+        <action name="descargaExcel" class="controllers.OutgoingMessageController" method="generateFile">
+        </action>
+        
+        <!--MENSAJES RECIBIDOS-->
+        <action name="incoming-message" class="controllers.IncomingMessageController" method="execute">
+            <result name="success" type="tiles">incoming_messages.tiles</result>  
+        </action>
+        <action name="ReadIncomingMessage" class="controllers.IncomingMessageController" method="read">
+            <result type="json"></result>
+        </action>
+        <action name="deleteIncomingMessage" class="controllers.IncomingMessageController" method="delete">
+            <result type="json"></result>
+        </action>
+        
+        <!-- CHAT CRM -->
+        <action name="historyMessage" class="controllers.ConversationController" method="execute">
+            <result name="success" type="tiles">chat_crm.tiles</result>  
+        </action>
+        <action name="replyConversation" class="controllers.ConversationController" method="reply">
+            <result type="json"></result>
+        </action>
+        
+        <!-- CAMPAING ACTION -->
+        <action name="create-campaign" class="controllers.CampaignController" method="createCampaing">
+            <result name="success" type="tiles">create.campaign.tiles</result>
+        </action>
+        <action name="load-campaign-file" class="controllers.CampaignController" method="loadCampaignFile">
+            <result name="success" type="tiles">create.campaign.tiles</result>
+        </action>
+    </package>
+    
+</struts>

@@ -1,0 +1,30 @@
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+    <definition name="masterpage" template="/template/masterpage.jsp">
+        <put-attribute name="title" value="Tiles Sample"/>
+        <put-attribute name="body" value=".bodyp"/>
+    </definition>
+
+    <definition name="nosotros.tiles" extends="masterpage">
+        <put-attribute name="body" value="/views/nosotros.jsp"/>
+    </definition>
+    <definition name="incoming_messages.tiles" extends="masterpage">
+        <put-attribute name="body" value="/views/message/incoming_message.jsp"/>
+    </definition>
+    <definition name="outgoing_messages.tiles" extends="masterpage">
+        <put-attribute name="body" value="/views/message/outgoing_message.jsp"/>
+    </definition>
+    <definition name="chat_crm.tiles" extends="masterpage">
+        <put-attribute name="body" value="/views/message/chat_crm.jsp"/>
+    </definition>
+    
+    <!-- SECTION CAMPAING -->
+    <definition name="create.campaign.tiles" extends="masterpage">
+        <put-attribute name="body" value="/views/campaign/create.jsp"/>
+    </definition>
+
+</tiles-definitions>
